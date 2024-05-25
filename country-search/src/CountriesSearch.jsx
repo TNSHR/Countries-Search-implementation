@@ -23,8 +23,8 @@ const filteredCountries=countries.filter(country=>country.name.common.toLowerCas
 
             <div style={{display:'flex',flexWrap:'wrap',gap:'20px',justifyContent:'center'}}>
                 {filteredCountries.length>0?(filteredCountries.map(country=>(<div key={country.cca3} className='countryCard' style={{display:'flex',flexDirection:'column',width:'100px',borderRadius:'8px',padding:'10px'}}>
-                        <img src={country.flags.png} alt={'Flag of ${country.name.common}'}  className='countryCard' style={{width:'100px',height:'auto',marginBottom:'10px'}}/>
-                        <p style={{margin:'0',fontSize:'10px',textAlign:'center'}} className='countryCard'>{country.name.common}</p>
+                        <div style={{container:'inherit'}}><img src={country.flags.png} alt={'Flag of ${country.name.common} '}  className='countryCard' style={{width:'100px',height:'auto',marginBottom:'10px'}}/>
+                        <p style={{margin:'0',fontSize:'10px',textAlign:'center'}} className='countryCard'>{country.name.common}</p></div>
                     </div>))):(<p>No matching countries found</p>)}
             </div>
         </div>
