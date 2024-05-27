@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import CountryCard from './CountryCards';
+import CountryCard from './CountryCard';
 import './countries.css'
 
 
-const CountriesSearch = () => {
+
+const CountriesSearch= () => {
   const [countries, setCountries] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState(null);
@@ -31,8 +32,6 @@ const CountriesSearch = () => {
   const filteredCountries = countries.filter(country =>
     country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  console.log('Filtered Countries:', filteredCountries);
 
   return (
     <div className="container">
