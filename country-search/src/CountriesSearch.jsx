@@ -1,50 +1,67 @@
 import React, { useState, useEffect } from 'react';
-
+import CountryCard from './CountryCards';
 import './countries.css'
 
 
-function CountriesSearch(){
+const CountriesSearch = () => {
+  const [countries, setCountries] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState(null);
 
-const[countries,setCountries]=useState([]);
-const[searchItem, setSearchItem]=useState('');
+  // Fetch countries data from API
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch('https://restcountries.com/v3.1/all');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setCountries(data);
+      } catch (error) {
+        console.error('Error fetching countries:', error);
+        setError(error.message);
+      }
+    };
 
-useEffect(()=>{
-    fetch(' https://restcountries.com/v3.1/all')
-    .then(response=>response.json())
-    .then(data=>setCountries(data))
-    .catch(error=>console.
-      error('Error fetching data',error))
-},[]);
-const filteredCountries=countries
-.filter(country=>country.name.common
-  .toLowerCase()
-  .includes(searchItem
-    .toLowerCase()))
-;
+    fetchCountries();
+  }, []);
 
+  // Filter countries based on the search term
+  const filteredCountries = countries.filter(country =>
+    country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-    return(
-        <div style={{margin:'0',
-        padding:'20px',
-        display:'flex',flexDirection:'column',
-        alignItems:'center'}} className="countryCard">
-            <input
-            type='text'
-            placeholder='Search for a country..'
-            value={searchItem}
-            onChange={e=>setSearchItem(e.target.value)} style={{textAlign:'center', height:"30px",width:"500px"}}/>
-            <div  className="countryCard" style={{display:'flex',flexWrap:'wrap',gap:'20px',justifyContent:'center'}}>
-                {filteredCountries.map(country=>(
-                    <div className="countryCard" key={country.cca3} style={{display:'flex',flexDirection:'column',width:'100px',borderRadius:'8px',padding:'10px'}}>
-                        <img src={country.flags.png} alt={'Flag of ${country.name.common}'} style={{width:'100px',height:'auto',marginBottom:'10px'}}/>
-                        <span style={{margin:'0',fontSize:'10px',textAlign:'center'}}>{country.name.common}</span>
-                    </div>
-                ))}
-            </div>
+  console.log('Filtered Countries:', filteredCountries);
+
+  return (
+    <div className="container">
+      <input
+        type="text"
+        id="searchBar"
+        placeholder="Search for a country..."
+        value={searchTerm}
+        onChange={e => setSearchTerm(e.target.value)}
+      />
+      {error ? (
+        <p className="error">Error: {error}</p>
+      ) : (
+        <div id="countriesContainer" className="countriesContainer">
+          {filteredCountries.length > 0 ? (
+            filteredCountries.map(country => (
+              <CountryCard
+                key={country.cca3}
+                name={country.name.common}
+                flag={country.flags.svg}
+              />
+            ))
+          ) : (
+            <p className="no-results">No results found</p>
+          )}
         </div>
-    )
-}
- export default CountriesSearch;
+      )}
+    </div>
+  );
+};
 
-  
-  
+export default CountriesSearch;

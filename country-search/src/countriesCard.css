@@ -1,0 +1,20 @@
+.countryCard {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    margin: 10px;
+    width: 150px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .countryCard img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .countryCard p {
+    margin: 0;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
