@@ -8,7 +8,7 @@ const CountriesSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState(null);
 
-  // Fetch countries data from API
+  
   useEffect(() => {
     const fetchCountries = async () => {
       try {
@@ -27,7 +27,7 @@ const CountriesSearch = () => {
     fetchCountries();
   }, []);
 
-  // Filter countries based on the search term
+ 
   const filteredCountries = countries.filter(country =>
     country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -35,7 +35,7 @@ const CountriesSearch = () => {
   console.log('Filtered Countries:', filteredCountries);
 
   return (
-    <div className="container">
+    <div className="countryCard">
       <input
         type="text"
         id="searchBar"
@@ -46,7 +46,7 @@ const CountriesSearch = () => {
       {error ? (
         <p className="error">Error: {error}</p>
       ) : (
-        <div id="countriesContainer" className="countriesContainer">
+        <div id="countriesContainer" className="countriesContainer" >
           {filteredCountries.length > 0 ? (
             filteredCountries.map(country => (
               <CountryCard
