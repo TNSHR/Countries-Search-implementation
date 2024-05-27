@@ -35,7 +35,7 @@ const CountriesSearch = () => {
   console.log('Filtered Countries:', filteredCountries);
 
   return (
-    <div className="countryCard">
+    <div className="container">
       <input
         type="text"
         id="searchBar"
@@ -46,7 +46,7 @@ const CountriesSearch = () => {
       {error ? (
         <p className="error">Error: {error}</p>
       ) : (
-        <div id="countriesContainer" className="countriesContainer" >
+        <div id="countriesContainer" className="countriesContainer">
           {filteredCountries.length > 0 ? (
             filteredCountries.map(country => (
               <CountryCard
