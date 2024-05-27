@@ -1,4 +1,5 @@
 import React from 'react';
+import './countriesCard.css'
 
 
 const CountryCard = ({ name, flag }) => (

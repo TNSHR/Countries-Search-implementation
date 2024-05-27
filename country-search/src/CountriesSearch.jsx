@@ -8,7 +8,7 @@ const CountriesSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState(null);
 
-  
+  // Fetch countries data from API
   useEffect(() => {
     const fetchCountries = async () => {
       try {
@@ -27,7 +27,7 @@ const CountriesSearch = () => {
     fetchCountries();
   }, []);
 
- 
+  // Filter countries based on the search term
   const filteredCountries = countries.filter(country =>
     country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
   );
