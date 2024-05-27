@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react';
-import './countries.css'
+
 
 function CountriesSearch(){
 
@@ -21,20 +21,51 @@ const filteredCountries=countries.filter(country=>country.name.common
 
 
     return(
-        <div className='countryCard' >
-            <div className='countryCard'><input
+        <div style={{textAlign:'centre',}} className='countryCard'>
+            <input
             className='search-bar'
             type='text'
             placeholder='Search for a country..'
             value={searchItem}
-            onChange={e=>setSearchItem(e.target.value)} /></div>
+            onChange={e=>setSearchItem(e.target.value)} 
+            style={{
+                display:'block',
+            width:'66%',
+            padding:'10px',
+            alignItems:'center',
+           
+            margin:'0 auto',
+            
+            }}/>
             
 
-            <div className='country-cards'>
-                {filteredCountries.length>0?(filteredCountries.map(country=>(<div key={country.cca3} className='countryCard' >
+            <div className='countryCard' 
+            style={{display:'flex',
+            flexWrap:'wrap', 
+            flexDirection:'column',
+            alignItems:'center',
+            alignContent:'center',
+            margin:'0 auto',
+            textAlign:'centre'
+            }}>
+
+                {filteredCountries.length>0?
+                (filteredCountries.map(country=>
+                (<div key={country.cca3} className='countryCard'  style={{display:'flex',
+                flexWrap:'wrap', 
+                flexDirection:'column',
+                alignItems:'center',
+                alignContent:'center',
+                margin:'0 auto',
+                textAlign:'centre',
+                padding:'10px',
+                justifyContent: 'space-around'
+                
+                }}>
                         <img src={country.flags.png} alt={'Flag of ${country.name.common} '}  />
                         <p>{country.name.common}</p></div>
-                    ))):(<p></p>)}
+                    ))):
+                    (<p></p>)}
             </div>
         </div>
     );
